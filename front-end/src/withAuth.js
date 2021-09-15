@@ -10,8 +10,8 @@ const withAuth = (ComponentToProtect, user, token) => {
         redirect: false
       }
     }
-    componentDidMount() {
 
+    componentDidMount() {
        if(!token){
          this.setState({loading:false, redirect:true})
        }
@@ -49,6 +49,7 @@ const withAuth = (ComponentToProtect, user, token) => {
       if(redirect) {
         return <Redirect to='/signin' />
       }
+      {console.log("With Auth ...props:",{...this.props})}
       return <ComponentToProtect {...this.props} user={user} />
     }
   }

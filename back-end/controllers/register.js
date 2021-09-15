@@ -22,7 +22,8 @@ const handleRegister = (req,res) => {
       return trx('users')
         .insert({
           email: loginEmail[0],
-          name:name
+          name:name,
+          balance:100000
         })
         .returning('*')
         .then(user => {

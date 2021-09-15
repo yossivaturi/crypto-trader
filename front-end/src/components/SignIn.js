@@ -31,7 +31,7 @@ class SignIn extends React.Component {
     .then(userdata=>{
       console.log(userdata);
       this.props.loadUser(userdata);
-      this.props.history.push('/');
+      this.props.history.push('/profile');
     })
     .catch(e => {
       console.log(e);
@@ -40,7 +40,7 @@ class SignIn extends React.Component {
   render() {
     return(
     <>
-      <h2>Sign In</h2>
+      <legend class="f8 fw6 ph0 mh0">Sign In</legend>
       <div>
         <label htmlFor="email">Email</label>
         <input type="email"

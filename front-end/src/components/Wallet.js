@@ -1,10 +1,11 @@
 import React from 'react'
-
+import './Wallet.css';
 const Wallet = ({coins}) => {
     
     return (
         
-        <div>
+        <div className="wallet">
+            <h3>My Wallet</h3>
             { 
                 Object.keys(coins).map((item, i) => (
                     <li key={i}>

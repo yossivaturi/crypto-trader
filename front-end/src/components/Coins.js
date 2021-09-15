@@ -8,7 +8,8 @@ import Wallet from './Wallet';
 
 
 
-const Coins = () => {
+const Coins = (props) => {
+  
     const SCALE = 5;
     const [coins, setCoins] = useState([]);
     const [search, setSearch] = useState('');
@@ -26,14 +27,57 @@ const Coins = () => {
       setSearch(e.target.value)
     }
 
-    const handleBuy = e => {
-      e.preventDefault();       
+    
+    //taking the money from account in db
+    const purchaseReq = (amount, price, email) => {
+      console.log('props:',props);
+      console.log(amount, price, email);
+      if(email) {
+        fetch('http://localhost:4000/purchase',{
+          method: 'POST',
+          headers: {
+            'Content-type':'application/json'
+          },
+          body: JSON.stringify({
+            amount: amount,
+            price: price,
+            email: email
+            
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        .catch(e => {
+          console.log(e);
+        })
+      }
+    }
+  
+
+
+    //goal:validate the purchase in the browser and send the request to the server
+    //using the function purchase()
+    const handleBuy = (e, price) => {//handles the onClick event next to the coin
+      e.preventDefault();
+      const balance = parseFloat(props.user.balance);
       let currValue = 0;
       let coin = e.target.children[1].id;//coin name
       let amount = parseFloat(e.target.children[1].value);
-      if(isNaN(amount)){//user didnt provided a number for the input
+      if(isNaN(amount)){ return;}//user didnt provided a number for the input
+      if(balance < amount*price ){
+        console.log(typeof balance, "you dont have enough money");
         return;
       }
+      
+
+
+      console.log(amount, price, props.user.email);
+      purchaseReq(amount, price, props.user.email);
+
+
+      //need to do in server
       if(buy.hasOwnProperty(coin)){//coin exists already in the user coins
         currValue = buy[coin] + amount;
       }else {
@@ -44,6 +88,9 @@ const Coins = () => {
       console.log(buy);
     }
     
+
+
+
     const filteredCoins = coins.filter(coin =>
       coin.name.toLowerCase().includes(search.toLowerCase())
     )

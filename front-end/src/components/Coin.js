@@ -12,17 +12,17 @@ const Coin = ({ name, image, symbol ,price, volume, priceChange, marketcap, hand
                 </div>
                 <div className="coin-data">
                     <p className="coin-price">{price}₪</p>
-                    <p className="coin-volume">{volume.toLocaleString()}₪</p>
+                    {/* <p className="coin-volume">{volume.toLocaleString()}₪</p> */}
                     { priceChange < 0 ? 
                         (<p className="coin-percent red"> {priceChange.toFixed(3)}%</p>)
                         :
                         (<p className="coin-percent green"> {priceChange.toFixed(3)}%</p>)
                     }
-                    <p className="coin-marketcap">
+                    {/* <p className="coin-marketcap">
                         Mkt Cap: {marketcap.toLocaleString()}₪
-                    </p>
-                    
-                    <form onSubmit={handleBuy}>
+                    </p> */}
+
+                    <form onSubmit={(e) => handleBuy(e, price)}>
                         <button type="submit" >Buy</button>
                         <input id={name} type="number" step="0.00001" placeholder="Enter a number" ></input>
                     </form>
