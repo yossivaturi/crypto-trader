@@ -32,8 +32,8 @@ export default function NavbarBootstrap() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/profile">Profile</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="drop1">drop1</NavDropdown.Item>
+            <NavDropdown title="Easter Eggs" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="drop1">Top 5 crypto investors</NavDropdown.Item>
               <NavDropdown.Item href="drop2">drop2</NavDropdown.Item>
               <NavDropdown.Item href="drop3">drop3</NavDropdown.Item>
               <NavDropdown.Divider />

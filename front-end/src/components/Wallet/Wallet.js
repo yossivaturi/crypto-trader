@@ -1,7 +1,7 @@
 import React from 'react'
 import './Wallet.css';
 const Wallet = ({coins}) => {
-    
+    //RECIEVE A OBJECT OF COINS FROM DB AND DISPLAY IT
     return (
         
         <div className="wallet">

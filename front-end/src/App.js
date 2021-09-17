@@ -9,7 +9,7 @@ import About from './components/About'
 import SignOut from './components/SignOut'
 import Delete from './components/Delete'
 import withAuth from './withAuth';
-import Coins from './components/Coins';
+import Coins from './components/Coins/Coins';
 import NavbarBootstrap from "./components/NavbarBootstrap";
 import SignIn from './components/SignIn/SignIn';
 
@@ -44,12 +44,9 @@ class App extends React.Component {
   render(){
     const {user,token} = this.state;
     return (
-      <div className='App'>
-       
+      <div className='App'>     
         <NavbarBootstrap />
-        
-        {/* <Coins /> */}
-
+  
         <Switch>
           <Route path='/' exact component={Home} />
           {/* userdata & token is being passed as props to <Profile /> from within <WithAuth /> */}

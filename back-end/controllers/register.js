@@ -21,7 +21,7 @@ const handleRegister = (req,res) => {
     .then(loginEmail => {
       return trx('users')
         .insert({
-          email: loginEmail[0],
+          email: email,
           name:name,
           balance:100000
         })
@@ -33,7 +33,7 @@ const handleRegister = (req,res) => {
     .then(trx.commit)
     .catch(e => {
       console.log(e);
-      trx.rollback
+      trx.rollback;
     })
   })
   .catch(err => {
