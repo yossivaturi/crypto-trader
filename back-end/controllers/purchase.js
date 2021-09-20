@@ -4,6 +4,7 @@ const axios = require('axios');
 
 const handlePurchase = async (req,res) => { 
   let price = 0;
+  let newBalance = 0;
   const {amount, coin, email} = req.body;
 
   //GET THE CURRENT PRICE OF THE COIN PICKED FROM COINGECKO API
@@ -22,53 +23,49 @@ const handlePurchase = async (req,res) => {
       //UPDATE USER BALANCE
       db('users').where({email}).decrement({balance: amount*price}).returning('*')
       .then((data) =>{
-        console.log("after balance update: ",data[0])
+        newBalance = parseFloat(data[0]["balance"]);
+        console.log("after balance update: ",data[0]["balance"])
       })
-    }
-  })
-  .catch(e => console.log(e))
-
-
-  //UPDATE WALLET
-  db('wallet').select('*').where({email, coin}).returning('*')
-  .then(data => {
-    console.log("data: ",data[0]);
-    if(data.length == 0){//COIN DOESNT EXIST FOR USER
-      db('wallet')
-      .insert({email: email, coin: coin, total_amount: amount})
-      .then(data => {
-        console.log(data);
-      })
-      .catch(e => {
-        console.log(e);
-      })
-    }else {//COIN ALREADY EXIST FOR USER, so we need to update amount
-        db('wallet')
-        .where({email, coin})
-        .increment({total_amount: amount})
-        .returning('total_amount')//so we log the updated amount
-        .then(total_amount => {
-          console.log("total_amount: ", total_amount);
+      .then(()=>{
+        //UPDATE WALLET
+        db('wallet').select('*').where({email, coin}).returning('*')
+        .then(data => {
+          console.log("data: ",data[0]);
+          if(data.length == 0){//COIN DOESNT EXIST FOR USER
+            db('wallet')
+            .insert({email: email, coin: coin, total_amount: amount})
+            .then(data => {
+              console.log(data);
+            })
+            .catch(e => {
+              console.log(e);
+            })
+          }else {//COIN ALREADY EXIST FOR USER, so we need to update amount
+              db('wallet')
+              .where({email, coin})
+              .increment({total_amount: amount})
+              .returning('total_amount')//so we log the updated amount
+              .then(total_amount => {
+                console.log("total_amount: ", total_amount);
+              })
+              .catch(e => {
+                console.log(e);
+              })
+              }
+        })
+        .then(data =>{
+          console.log("AFTER ALL UPDATES: ",data);
+          res.status(200).json({json: "YOUR RESPONSE", amount, coin, newBalance })
         })
         .catch(e => {
           console.log(e);
         })
-        }
+        //END OF UPDATE WALLET
+      })
+    }
   })
-  .catch(e => {
-    console.log(e);
-  })
-  //END OF UPDATE WALLET
-
-
+  .catch(e => console.log(e))
 }//END OF handlePurchase()
-
-  
-
-
-
-  
-
 
 
   module.exports = {
