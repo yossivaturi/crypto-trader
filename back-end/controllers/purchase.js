@@ -5,6 +5,7 @@ const axios = require('axios');
 const handlePurchase = async (req,res) => { 
   let price = 0;
   let newBalance = 0;
+  let newAmount = 0;
   const {amount, coin, email} = req.body;
 
   //GET THE CURRENT PRICE OF THE COIN PICKED FROM COINGECKO API
@@ -30,12 +31,15 @@ const handlePurchase = async (req,res) => {
         //UPDATE WALLET
         db('wallet').select('*').where({email, coin}).returning('*')
         .then(data => {
-          console.log("data: ",data[0]);
           if(data.length == 0){//COIN DOESNT EXIST FOR USER
             db('wallet')
             .insert({email: email, coin: coin, total_amount: amount})
-            .then(data => {
-              console.log(data);
+            .returning('total_amount')
+            .then(total_amount => {
+              newAmount = parseFloat(total_amount[0]);
+              console.log("new amount", newAmount);
+              res.status(200).json({newAmount, coin, newBalance })
+
             })
             .catch(e => {
               console.log(e);
@@ -46,16 +50,14 @@ const handlePurchase = async (req,res) => {
               .increment({total_amount: amount})
               .returning('total_amount')//so we log the updated amount
               .then(total_amount => {
-                console.log("total_amount: ", total_amount);
+                newAmount = parseFloat(total_amount[0]);
+                console.log("new amount", newAmount);
+                res.status(200).json({newAmount, coin, newBalance })
               })
               .catch(e => {
                 console.log(e);
               })
               }
-        })
-        .then(data =>{
-          console.log("AFTER ALL UPDATES: ",data);
-          res.status(200).json({json: "YOUR RESPONSE", amount, coin, newBalance })
         })
         .catch(e => {
           console.log(e);

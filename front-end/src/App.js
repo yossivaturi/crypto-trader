@@ -23,19 +23,22 @@ class App extends React.Component {
         name: '',
         email:'',
         joined:'',
-        balance: 0
+        balance: 0,
+        wallet: {}
       },
       token: null
     }
   }
   loadUser = (data) => {
+    console.log("LOAD USER",data);
     this.setState({
       user: {
         id: data.user.id,
         name: data.user.name,
         email: data.user.email,
         joined: data.user.joined,
-        balance: data.user.balance
+        balance: data.user.balance,
+        wallet: data.user.wallet
       },
       token: data.token
     })

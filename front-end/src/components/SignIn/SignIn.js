@@ -30,7 +30,7 @@ class SignIn extends Component {
         })
         .then(response => response.json())
         .then(userdata=>{
-          console.log(userdata);
+          console.log("USERDATA",userdata);
           this.props.loadUser(userdata);
           this.props.history.push('/profile');
         })

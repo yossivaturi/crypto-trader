@@ -26,8 +26,16 @@ const handleSignIn = (req,res) => {
             expiresIn: '1h'
           });
           console.log('token', token);
-          res.status(200).json({user:user[0], token:token})
-        })
+
+          //GET WALLET FROM DB -> build object from output
+          db('wallet').select('*').where({email})
+          .then((data) => {
+            let wallet = {}
+            data.forEach(x => wallet = {...wallet, [x["coin"]]: x["total_amount"]})
+            user[0] = {...user[0], wallet}
+            res.status(200).json({user:user[0], token:token})
+          })
+        })  
         .catch(err => {
           console.log(err);
           res.status(400).json('unable to get user');

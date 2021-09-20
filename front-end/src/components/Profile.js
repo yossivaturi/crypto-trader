@@ -6,8 +6,10 @@ import Wallet from "./Wallet/Wallet";
 const Profile = (props)=>{
   const SCALE = 5; 
   const [coins, setCoins] = useState([]);
-  const [buy, setBuy] = useState({});
-
+  const [wallet, setWallet] = useState(props.user.wallet);
+  const [balance, setBalance] = useState(props.user.balance)
+  
+console.log("WALLET:",props);
   useEffect(() => {
     axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=ils&order=market_cap_desc&per_page=100&page=1&sparkline=false')
     .then(res => {
@@ -33,7 +35,9 @@ const Profile = (props)=>{
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        console.log("THERE YOU GO",data);
+        setWallet({...wallet, [coin]: data.newAmount });
+        setBalance(data.newBalance)
       })
       .catch(e => {
         console.log(e);
@@ -46,7 +50,6 @@ const Profile = (props)=>{
   const handleBuy = (e, price) => {//handles the onClick event next to the coin
     e.preventDefault();
     const balance = parseFloat(props.user.balance);
-    let currValue = 0;
     let coin = e.target.children[1].id;//coin name
     let amount = parseFloat(e.target.children[1].value);
     if(isNaN(amount)){ return;}//user didnt provided a number for the input
@@ -55,23 +58,14 @@ const Profile = (props)=>{
       return;
     }
     purchaseReq(amount, coin, props.user.email);
-    //need to do in server
-    if(buy.hasOwnProperty(coin)){//coin exists already in the user coins
-      currValue = buy[coin] + amount;
-    }else {
-      currValue = amount;
-    }
-    currValue = parseFloat(currValue.toFixed(SCALE));
-    setBuy({...buy, [coin]: currValue });
-    console.log(buy);
   }
   
   return (
     <>
       <h1>Profile</h1>
       <h3> Welcome {`${props.user.name}`}</h3>
-      <h3> your balance: {`${props.user.balance}`}</h3>
-      {/* <Wallet coins={props.user.wallet} /> */}
+      <h3> your balance: {`${balance}`}</h3>
+      <Wallet coins={wallet} />
       <Coins coins={coins} handleBuy={handleBuy} />
     </>
   )
