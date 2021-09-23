@@ -32,10 +32,13 @@ export default function NavbarBootstrap() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/profile">Profile</Nav.Link>
-            <NavDropdown title="Easter Eggs" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="drop1">Top 5 crypto investors</NavDropdown.Item>
-              <NavDropdown.Item href="drop2">drop2</NavDropdown.Item>
-              <NavDropdown.Item href="drop3">drop3</NavDropdown.Item>
+            <Nav.Link href="/news">News</Nav.Link>
+            <NavDropdown title="Info" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="/">Top 5 Crypto Investors</NavDropdown.Item>
+              <NavDropdown.Item href="/">2</NavDropdown.Item>
+              <NavDropdown.Item href="/">3</NavDropdown.Item>
+              <NavDropdown.Item href="/">4</NavDropdown.Item>
+
               <NavDropdown.Divider />
               <NavDropdown.Item href="seperateddrop">Separated link</NavDropdown.Item>
             </NavDropdown>
@@ -43,10 +46,14 @@ export default function NavbarBootstrap() {
 
          
           <Nav>
-            <Nav.Link href="/signin">Sign in</Nav.Link>
-            <Nav.Link href="/signout">Sign out</Nav.Link>
-            <Nav.Link href="/register">Register</Nav.Link>
-            <Nav.Link href="/delete">Delete account</Nav.Link>  
+            <NavDropdown title="User actions" id="collasible-nav-dropdown">
+                <NavDropdown.Item href="/signin">Sign in</NavDropdown.Item>
+                <NavDropdown.Item href="/signout">Sign out</NavDropdown.Item>
+                <NavDropdown.Item href="/register">Register</NavDropdown.Item>
+                
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="/delete">Delete account</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
 
         </Navbar.Collapse>

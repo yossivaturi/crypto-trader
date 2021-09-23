@@ -1,11 +1,11 @@
+import News from "./News/News";
+
 const Home = (props)=>{
   console.log(props);
   const {history,location,match} = props;
   return (
     <>
-      <h1>Home</h1>
-      <h3>show some crypto articles (maybe changing by themselves)</h3>
-      
+      <h1>Home</h1>      
       <ul>
       <br></br>
       <h3>props:</h3>

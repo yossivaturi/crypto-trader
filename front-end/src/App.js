@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Switch, Route, Link} from 'react-router-dom';
 import Register from './components/Register'
 import Home from './components/Home'
+import News from './components/News/News';
 import Profile from './components/Profile';
 import About from './components/About'
 import SignOut from './components/SignOut'
@@ -52,6 +53,7 @@ class App extends React.Component {
   
         <Switch>
           <Route path='/' exact component={Home} />
+          <Route path='/news'  component={News} />
           {/* userdata & token is being passed as props to <Profile /> from within <WithAuth /> */}
           <Route path='/profile' exact component={withAuth(Profile,user,token)}  />
           <Route path='/about' component={withAuth(About,user,token)}  />

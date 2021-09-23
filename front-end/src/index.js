@@ -2,17 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import ParticlesBack from './ParticlesBack'
 import 'tachyons';
+import { Provider } from 'react-redux'
+import store from './app/store';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ParticlesBack /> 
-      <App />
-    </BrowserRouter>
+    <Router>
+      <Provider store={store}>
+        <ParticlesBack /> 
+        <App />
+      </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -3,8 +3,7 @@ import axios from 'axios';
 import Coins from "./Coins/Coins";
 import Wallet from "./Wallet/Wallet";
 
-const Profile = (props)=>{
-  const SCALE = 5; 
+const Profile = (props)=>{ 
   const [coins, setCoins] = useState([]);
   const [wallet, setWallet] = useState(props.user.wallet);
   const [balance, setBalance] = useState(props.user.balance)
@@ -18,9 +17,8 @@ console.log("WALLET:",props);
     .catch(error => console.log(error));
   }, []);
 
-  //taking the money from account in db
+  
   const purchaseReq = (amount, coin, email) => {
-    console.log('props:',props);
     if(email) {
       fetch('http://localhost:4000/purchase',{
         method: 'POST',
