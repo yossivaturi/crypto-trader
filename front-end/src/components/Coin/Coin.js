@@ -1,34 +1,59 @@
 import React from 'react';
 import './Coin.css';
 
+
 const Coin = ({ name, image, symbol ,price, volume, priceChange, marketcap, handleBuy }) => {
     return (
-        <div className="coin-container">
+        <>
+        
+        
+          <tr>
+            <td><img style={{height:'6vh', width:'3vw'}} src={image} alt="crypto"/></td>
+            <td>{name}</td>
+            <td>{symbol.toUpperCase()}</td>
+            <td>
+            { priceChange < 0 ? 
+                (<p className="red">{priceChange.toFixed(3)}%</p>)
+                :
+                (<p className="green"> {priceChange.toFixed(3)}%</p>)
+            } 
+            </td>
+            <td>{price}₪</td>
+            <td>    
+                
+                <form onSubmit={(e) => handleBuy(e, price, name)}>
+                    <button id={'buy'} type="submit">Buy</button>
+                    <button id={'sell'} type="submit">Sell</button>
+                    <input id={name} type="number" step="0.00001" placeholder="Enter a number" ></input>
+                </form>
+            </td>
+          </tr>
+       
+      
+
+        {/* <div className="coin-container">
             <div className="coin-row">
                 <div className="coin">
                     <img src={image} alt="crypto"/>
                     <h1>{name}</h1>
-                    <p className="coin-symbol">{symbol}</p>
-                </div>
-                <div className="coin-data">
-                    <p className="coin-price">{price}₪</p>
-                    {/* <p className="coin-volume">{volume.toLocaleString()}₪</p> */}
+                    <h1>{symbol.toUpperCase()}</h1>
+                    <h1>{price}₪</h1>
+                    <h1>Daily change: </h1>
                     { priceChange < 0 ? 
-                        (<p className="coin-percent red"> {priceChange.toFixed(3)}%</p>)
+                        (<h1 className="red">{priceChange.toFixed(3)}%</h1>)
                         :
-                        (<p className="coin-percent green"> {priceChange.toFixed(3)}%</p>)
+                        (<h1 className="green"> {priceChange.toFixed(3)}%</h1>)
                     }
-                    {/* <p className="coin-marketcap">
-                        Mkt Cap: {marketcap.toLocaleString()}₪
-                    </p> */}
+                </div>
 
-                    <form onSubmit={(e) => handleBuy(e, price)}>
-                        <button type="submit" >Buy</button>
+                    <form onSubmit={(e) => handleBuy(e, price, name)}>
+                        <button id={'buy'} type="submit">Buy</button>
+                        <button id={'sell'} type="submit">Sell</button>
                         <input id={name} type="number" step="0.00001" placeholder="Enter a number" ></input>
                     </form>
-                </div>  
-            </div>
-        </div>
+            </div>  
+        </div> */}
+       </>
     )
 }
 

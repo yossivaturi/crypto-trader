@@ -18,7 +18,7 @@ console.log("WALLET:",props);
   }, []);
 
   
-  const purchaseReq = (amount, coin, email) => {
+  const purchaseReq = (amount, coin, email, submitter) => {
     if(email) {
       fetch('http://localhost:4000/purchase',{
         method: 'POST',
@@ -28,7 +28,8 @@ console.log("WALLET:",props);
         body: JSON.stringify({
           amount: amount,
           coin: coin,
-          email: email
+          email: email,
+          submitter: submitter
         })
       })
       .then(response => response.json())
@@ -45,27 +46,33 @@ console.log("WALLET:",props);
     
   //goal:validate the purchase in the browser and send the request to the server
   //using the function purchase()
-  const handleBuy = (e, price) => {//handles the onClick event next to the coin
+  const handleBuy = (e, price, coinName) => {//handles the onClick event next to the coin
     e.preventDefault();
+    const submitter = e.nativeEvent.submitter.id;//buy or sell
     const balance = parseFloat(props.user.balance);
-    let coin = e.target.children[1].id;//coin name
-    let amount = parseFloat(e.target.children[1].value);
+    let amount = parseFloat(e.target.children[2].value);
     if(isNaN(amount)){ return;}//user didnt provided a number for the input
-    if(balance < amount*price ){
+    
+    if(submitter === 'buy' && balance < amount*price ){
       alert("you dont have enough money");
       return;
     }
-    purchaseReq(amount, coin, props.user.email);
+    
+    if(submitter === 'sell' && ((wallet[coinName] < amount) || ( typeof wallet[coinName] === 'undefined'))){
+      alert("you dont have enough amount of this specific coin");
+      return;
+    }
+    purchaseReq(amount, coinName, props.user.email, submitter);
   }
   
   return (
-    <>
+    <div style={{height: '100vh'}}>
       <h1>Profile</h1>
       <h3> Welcome {`${props.user.name}`}</h3>
       <h3> your balance: {`${balance}`}</h3>
       <Wallet coins={wallet} />
       <Coins coins={coins} handleBuy={handleBuy} />
-    </>
+    </div>
   )
   }
   export default Profile;
