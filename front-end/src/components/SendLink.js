@@ -37,9 +37,9 @@ const SendLink = ({email}) => {
         <div>
             <form onSubmit={handleLink}>
                 <div className="form-group row d-flex justify-content-center" >
-                    <input type="email" style={{width:'40%'}} className="form-control" id="exampleFormControlInput1" placeholder="Email"/>
+                    <input type="email" style={{width:'21%'}} className="form-control" id="exampleFormControlInput1" placeholder="Friends Email"/>
                     <div>
-                    <Button type="submit" style={{width:'20%'}} variant="outline-primary">Send</Button>
+                    <Button type="submit" style={{width:'7%'}} variant="outline-primary">Send</Button>
                     </div>
                 </div>
             </form>

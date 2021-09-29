@@ -2,11 +2,14 @@ import React, {useState, useEffect} from 'react';
 import Coin from '../Coin/Coin';
 import './Coins.css';
 import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
+
 
 
 const Coins = (props) => {
     const [search, setSearch] = useState('');
     
+
     const handleChange = e => {
       setSearch(e.target.value)
     }
@@ -17,13 +20,10 @@ const Coins = (props) => {
 
     return (
         <div>
-            <div className="coin-app coin-search">
+
+            <div className="coin-search">
                 <input onChange={handleChange} type="text" placeholder="you can filter for a specific coin" className="coin-input"/>      
             </div>
-            <legend>prices could differ when purchased because
-               were getting prices in real time when purchasing,</legend>
-            <legend> and the prices you see was current when page loaded</legend>
-
             <Table striped bordered hover  variant="dark" responsive size="sm">
             <thead >
               <tr>

@@ -4,14 +4,19 @@ import Coins from "./Coins/Coins";
 import Wallet from "./Wallet/Wallet";
 import SendLink from './SendLink';
 import Button from 'react-bootstrap/Button'
+import Alert from 'react-bootstrap/Alert'
+import OverlayFriend from './OverlayFriend';
+import OverlayWallet from './OverlayWallet';
+import OverlayInfo from './OverlayInfo';
+
 
 
 const Profile = (props)=>{ 
   const [coins, setCoins] = useState([]);
   const [wallet, setWallet] = useState(props.user.wallet);
-  const [balance, setBalance] = useState(props.user.balance)
-  const [showResults, setShowResults] = useState(false)
-
+  const [balance, setBalance] = useState(props.user.balance);
+  const [showInfo, setShowInfo] = useState(false);
+  const [show, setShow] = useState(true);
   
 console.log("WALLET:",props);
   useEffect(() => {
@@ -69,26 +74,30 @@ console.log("WALLET:",props);
     }
     purchaseReq(amount, coinName, props.user.email, submitter);
   }
+
+  
   return (
+    
     <div style={{height: '100vh'}}>
-      <h3> Welcome {`${props.user.name}`}</h3>
-
+      <h3> Welcome {`${props.user.name}, your current balance is: ${balance}₪`}</h3>
       
-
-      <div>
-      <Button onClick={() => setShowResults(!showResults)} variant="primary">Recommend crypto trader to a friend</Button>
-        { showResults ? <SendLink email={props.user.email}/> : null }
-      </div>
-      
-      
-      <br></br>
-      <br></br>
-      <br></br>
-      <h3> your balance: {`${balance}`}</h3>
-      <Wallet coins={wallet} />
+      <OverlayFriend email={props.user.email}/>
+      <OverlayWallet wallet={props.user.wallet} />
+      <OverlayInfo />
       <Coins coins={coins} handleBuy={handleBuy} />
     </div>
   )
   }
   export default Profile;
   
+
+
+
+{/* <div> */}
+{/* <Button onClick={() => setShowInfo(!showInfo)} variant="secondary">Show more info about purchasing</Button>
+  { showInfo ? <>
+
+
+    
+  </> : null }
+</div> */}
