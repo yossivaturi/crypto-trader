@@ -30,6 +30,17 @@ const handleRegister = (req,res) => {
           res.json({user:user[0]})
         })
     })
+    .then(data => {
+      return trx('affiliate')
+        .where({
+          friendemail: email
+          
+        })
+        .returning('email')
+        .then(data => {
+          db('users').where({email: data[0].email}).increment({balance: 1000}).returning('*')
+        })
+    })
     .then(trx.commit)
     .catch(e => {
       console.log(e);

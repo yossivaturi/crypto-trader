@@ -9,18 +9,18 @@ const Coin = ({ name, image, symbol ,price, volume, priceChange, marketcap, hand
         
           <tr>
             <td><img style={{height:'6vh', width:'3vw'}} src={image} alt="crypto"/></td>
-            <td>{name}</td>
-            <td>{symbol.toUpperCase()}</td>
-            <td>
+            <td style={{paddingTop:'20px'}} >{name}</td>
+            <td style={{paddingTop:'20px'}}>{symbol.toUpperCase()}</td>
+            <td style={{paddingTop:'20px'}}>
             { priceChange < 0 ? 
                 (<p className="red">{priceChange.toFixed(3)}%</p>)
                 :
                 (<p className="green"> {priceChange.toFixed(3)}%</p>)
             } 
             </td>
-            <td>{price}₪</td>
-            <td>    
-                
+            <td style={{paddingTop:'20px'}}>{price}₪</td>
+
+            <td style={{paddingTop:'20px'}}>    
                 <form onSubmit={(e) => handleBuy(e, price, name)}>
                     <button id={'buy'} type="submit">Buy</button>
                     <button id={'sell'} type="submit">Sell</button>

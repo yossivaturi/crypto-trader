@@ -31,6 +31,12 @@ const OverlayFriend = ({email}) => {
           })
           .then(response => response.json())
           .then(data => {
+            console.log(data); 
+            document.getElementById("delete").remove();
+            let para = document.createElement("P");                       // Create a <p> node
+            let t = document.createTextNode("Thank you! your link has been sent :)");      // Create a text node
+            para.appendChild(t);    
+            document.getElementById("fill").appendChild(para)
 
           })
           .catch(e => {
@@ -49,16 +55,19 @@ const OverlayFriend = ({email}) => {
                 <Popover id={`popover-positioned-bottom`}>
                     <Popover.Header as="h3">{`send affiliate link to a friend`}</Popover.Header>
                     <Popover.Body>
+                    <div id="delete">
                     <strong>Send to a friend and when he register you get 1000₪</strong>
-                    <form onSubmit={handleLink}>
+                    <form  onSubmit={handleLink}>
                         <input type="email" placeholder="Enter friends email"></input>
                         <Button type="submit" variant="secondary">Send</Button>
                     </form>
+                    </div>
+                    <div id="fill"></div>
                     </Popover.Body>
                 </Popover>
                 }
                 >
-                <Button variant="dark">Recommend a friend</Button>
+                <Button  variant="dark">Recommend a friend</Button>
             </OverlayTrigger>
         
     )

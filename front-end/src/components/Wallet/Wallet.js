@@ -3,14 +3,13 @@ import './Wallet.css';
 const Wallet = ({coins}) => {
     //RECIEVE A OBJECT OF COINS FROM DB AND DISPLAY IT
     return (
-        
         <div className="wallet">
             <h3>My Wallet</h3>
             { 
                 Object.keys(coins).map((item, i) => (
                     <li key={i}>
-                        {console.log(item)}
-                        {console.log(coins)}
+                        {console.log("IN WALLET",item)}
+
                         {item} : { coins[item] }
                     </li>
                 ))

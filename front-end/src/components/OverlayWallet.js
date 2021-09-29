@@ -18,7 +18,7 @@ const OverlayWallet = ({wallet}) => {
         
             <OverlayTrigger
                 trigger="click"
-                key={'bottom'}
+                key={1}
                 placement={'bottom'}
                 overlay={
                 <Popover id={`popover-positioned-bottom`}>
@@ -30,7 +30,7 @@ const OverlayWallet = ({wallet}) => {
                 </Popover>
                 }
                 >
-                <Button variant="warning">My Wallet</Button>
+                <Button  variant="warning">My Wallet</Button>
             </OverlayTrigger>
         
     )

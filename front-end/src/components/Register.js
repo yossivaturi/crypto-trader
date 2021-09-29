@@ -7,9 +7,12 @@ class Register extends React.Component {
     this.state = {
       email: '',
       password: '',
-      name: ''
+      name: '',
+      show: true
     }
   }
+
+
 
   onNameChange = (e) => {
     this.setState({name:e.target.value})
@@ -36,7 +39,9 @@ class Register extends React.Component {
     })
     .then(response => response.json())
     .then(user => {
+      this.setState({show: false})
       console.log('user',user);
+
     })
     .catch(e => {
       console.log(e);
@@ -44,8 +49,12 @@ class Register extends React.Component {
   }
   render() {
     return (
-      <>
-        <h2>Register</h2>
+
+      <div>
+          
+        { this.state.show ? 
+          <>
+                  <h2>Register</h2>
         <div>
           <label htmlFor="name">Name</label>
           <input type="text"
@@ -72,7 +81,18 @@ class Register extends React.Component {
         <div>
           <Link to='/signin'>Sign In</Link>
         </div>
-      </>
+        </>
+          
+        : 
+          
+        <h1>Welcome to the crypto club!</h1> 
+        }
+
+      </div>
+      
+
+        
+        
     )
   }
 }

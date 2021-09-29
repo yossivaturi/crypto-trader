@@ -10,7 +10,6 @@ import OverlayWallet from './OverlayWallet';
 import OverlayInfo from './OverlayInfo';
 
 
-
 const Profile = (props)=>{ 
   const [coins, setCoins] = useState([]);
   const [wallet, setWallet] = useState(props.user.wallet);
@@ -18,7 +17,8 @@ const Profile = (props)=>{
   const [showInfo, setShowInfo] = useState(false);
   const [show, setShow] = useState(true);
   
-console.log("WALLET:",props);
+
+
   useEffect(() => {
     axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=ils&order=market_cap_desc&per_page=100&page=1&sparkline=false')
     .then(res => {
@@ -27,7 +27,9 @@ console.log("WALLET:",props);
     .catch(error => console.log(error));
   }, []);
 
-  
+
+
+
   const purchaseReq = (amount, coin, email, submitter) => {
     if(email) {
       fetch('http://localhost:4000/purchase',{
@@ -44,7 +46,6 @@ console.log("WALLET:",props);
       })
       .then(response => response.json())
       .then(data => {
-        console.log("THERE YOU GO",data);
         setWallet({...wallet, [coin]: data.newAmount });
         setBalance(data.newBalance)
       })
@@ -54,9 +55,8 @@ console.log("WALLET:",props);
     }
   }
     
-  //goal:validate the purchase in the browser and send the request to the server
-  //using the function purchase()
-  const handleBuy = (e, price, coinName) => {//handles the onClick event next to the coin
+ 
+  const handleBuy = (e, price, coinName) => {
     e.preventDefault();
     const submitter = e.nativeEvent.submitter.id;//buy or sell
     const balance = parseFloat(props.user.balance);
@@ -79,10 +79,11 @@ console.log("WALLET:",props);
   return (
     
     <div style={{height: '100vh'}}>
+     
       <h3> Welcome {`${props.user.name}, your current balance is: ${balance}₪`}</h3>
       
       <OverlayFriend email={props.user.email}/>
-      <OverlayWallet wallet={props.user.wallet} />
+      <OverlayWallet wallet={wallet} />
       <OverlayInfo />
       <Coins coins={coins} handleBuy={handleBuy} />
     </div>
@@ -90,14 +91,3 @@ console.log("WALLET:",props);
   }
   export default Profile;
   
-
-
-
-{/* <div> */}
-{/* <Button onClick={() => setShowInfo(!showInfo)} variant="secondary">Show more info about purchasing</Button>
-  { showInfo ? <>
-
-
-    
-  </> : null }
-</div> */}
