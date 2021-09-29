@@ -1,26 +1,12 @@
 import News from "./News/News";
+import {Switch, Route, Link} from 'react-router-dom';
 
 const Home = (props)=>{
-  console.log(props);
-  const {history,location,match} = props;
   return (
     <>
-      <h1>Home</h1>      
-      <ul>
-      <br></br>
-      <h3>props:</h3>
-        {
-          Object.keys(props).map((item,i)=>{
-            return (
-                <li key={i}>{`${item}: ${JSON.stringify(props[item])}`}</li>
-              )
-          })
-        }
-      </ul>    
-      {console.log(props)}
-
-
-      
+      <h1>Crypto Trader</h1> 
+      <Link to="/signin">Sign In</Link>  <br></br> 
+      <Link to="/register">Register</Link>   
     </>
   )
 }

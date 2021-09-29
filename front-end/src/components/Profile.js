@@ -2,11 +2,16 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Coins from "./Coins/Coins";
 import Wallet from "./Wallet/Wallet";
+import SendLink from './SendLink';
+import Button from 'react-bootstrap/Button'
+
 
 const Profile = (props)=>{ 
   const [coins, setCoins] = useState([]);
   const [wallet, setWallet] = useState(props.user.wallet);
   const [balance, setBalance] = useState(props.user.balance)
+  const [showResults, setShowResults] = useState(false)
+
   
 console.log("WALLET:",props);
   useEffect(() => {
@@ -64,11 +69,21 @@ console.log("WALLET:",props);
     }
     purchaseReq(amount, coinName, props.user.email, submitter);
   }
-  
   return (
     <div style={{height: '100vh'}}>
-      <h1>Profile</h1>
       <h3> Welcome {`${props.user.name}`}</h3>
+
+      
+
+      <div>
+      <Button onClick={() => setShowResults(!showResults)} variant="primary">Recommend crypto trader to a friend</Button>
+        { showResults ? <SendLink email={props.user.email}/> : null }
+      </div>
+      
+      
+      <br></br>
+      <br></br>
+      <br></br>
       <h3> your balance: {`${balance}`}</h3>
       <Wallet coins={wallet} />
       <Coins coins={coins} handleBuy={handleBuy} />
