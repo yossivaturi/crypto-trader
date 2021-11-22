@@ -1,10 +1,6 @@
 import React from 'react'
-import Overlay from 'react-bootstrap/Overlay'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
-import Tooltip from 'react-bootstrap/Tooltip'
-import PopoverBody from 'react-bootstrap/PopoverBody'
-import PopoverHeader from 'react-bootstrap/PopoverHeader'
 import Button from 'react-bootstrap/Button'
 import Wallet from './Wallet/Wallet'
 

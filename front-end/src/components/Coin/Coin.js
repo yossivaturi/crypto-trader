@@ -4,9 +4,7 @@ import './Coin.css';
 
 const Coin = ({ name, image, symbol ,price, volume, priceChange, marketcap, handleBuy }) => {
     return (
-        <>
-        
-        
+        <>    
           <tr>
             <td><img style={{height:'6vh', width:'3vw'}} src={image} alt="crypto"/></td>
             <td style={{paddingTop:'20px'}} >{name}</td>

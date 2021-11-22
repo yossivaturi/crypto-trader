@@ -10,7 +10,6 @@ import About from './components/About'
 import SignOut from './components/SignOut'
 import Delete from './components/Delete'
 import withAuth from './withAuth';
-import Coins from './components/Coins/Coins';
 import NavbarBootstrap from "./components/NavbarBootstrap";
 import SignIn from './components/SignIn/SignIn';
 
@@ -53,7 +52,7 @@ class App extends React.Component {
   
         <Switch>
           <Route path='/' exact component={Home} />
-          <Route path='/news'  component={News} />
+          {/* <Route path='/news'  component={News} /> */}
           {/* userdata & token is being passed as props to <Profile /> from within <WithAuth /> */}
           <Route path='/profile' exact component={withAuth(Profile,user,token)}  />
           <Route path='/about' component={withAuth(About,user,token)}  />

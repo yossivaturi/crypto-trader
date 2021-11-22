@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import ParticlesBack from './ParticlesBack'
 import 'tachyons';
 import { Provider } from 'react-redux'
 import store from './app/store';
@@ -14,7 +13,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-        <ParticlesBack /> 
         <App />
       </Provider>
     </Router>

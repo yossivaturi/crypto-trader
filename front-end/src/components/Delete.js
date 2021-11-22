@@ -7,7 +7,7 @@ class Delete extends React.Component {
   }
   onSubmitDelete = () => {
     if(this.props.user.email) {
-      fetch('http://localhost:4000/delete',{
+      fetch(`${process.env.REACT_APP_BASE_NODE_URL}/delete`,{
         method: 'POST',
         headers: {
           'Content-type':'application/json'

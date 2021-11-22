@@ -33,7 +33,7 @@ const OverlayInfo = () => {
                 </Popover>
                 }
                 >
-                <Button variant="dark">Purchase Info</Button>
+                <Button variant="light">Purchase Info</Button>
             </OverlayTrigger>
         
     )

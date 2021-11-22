@@ -11,7 +11,7 @@ const SendLink = ({email}) => {
         e.preventDefault();
         const friendEmail = e.target.children[0].children[0].value
         console.log(friendEmail, email);
-        fetch('http://localhost:4000/link',{
+        fetch(`${process.env.REACT_APP_BASE_NODE_URL}/link`,{
             method: 'POST',
             headers: {
               'Content-type':'application/json'

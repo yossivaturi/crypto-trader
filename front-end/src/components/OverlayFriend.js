@@ -18,7 +18,7 @@ const OverlayFriend = ({email}) => {
         
         const friendEmail = e.target.children[0].value
         console.log(friendEmail, email);
-        fetch('http://localhost:4000/link',{
+        fetch(`${process.env.REACT_APP_BASE_NODE_URL}/link`,{
             method: 'POST',
             headers: {
               'Content-type':'application/json'
@@ -67,7 +67,7 @@ const OverlayFriend = ({email}) => {
                 </Popover>
                 }
                 >
-                <Button  variant="dark">Recommend a friend</Button>
+                <Button variant="light">Recommend a friend</Button>
             </OverlayTrigger>
         
     )

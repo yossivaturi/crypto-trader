@@ -17,7 +17,7 @@ const withAuth = (ComponentToProtect, user, token) => {
        }
        else{
         console.log('componentDidMount',token);
-        fetch('http://localhost:4000/checkToken',{
+        fetch(`${process.env.REACT_APP_BASE_NODE_URL}/checkToken`,{
           method:'POST',
           headers: {
             'Content-type':'application/json'

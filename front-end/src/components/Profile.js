@@ -1,13 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Coins from "./Coins/Coins";
-import Wallet from "./Wallet/Wallet";
-import SendLink from './SendLink';
-import Button from 'react-bootstrap/Button'
-import Alert from 'react-bootstrap/Alert'
 import OverlayFriend from './OverlayFriend';
 import OverlayWallet from './OverlayWallet';
 import OverlayInfo from './OverlayInfo';
+import './Profile.css';
 
 
 const Profile = (props)=>{ 
@@ -32,7 +29,7 @@ const Profile = (props)=>{
 
   const purchaseReq = (amount, coin, email, submitter) => {
     if(email) {
-      fetch('http://localhost:4000/purchase',{
+      fetch(`${process.env.REACT_APP_BASE_NODE_URL}/purchase`,{
         method: 'POST',
         headers: {
           'Content-type':'application/json'
@@ -76,16 +73,23 @@ const Profile = (props)=>{
   }
 
   
-  return (
-    
-    <div style={{height: '100vh'}}>
-     
-      <h3> Welcome {`${props.user.name}, your current balance is: ${balance}₪`}</h3>
-      
-      <OverlayFriend email={props.user.email}/>
-      <OverlayWallet wallet={wallet} />
-      <OverlayInfo />
-      <Coins coins={coins} handleBuy={handleBuy} />
+  return ( 
+    <div>
+     <h3> Welcome {`${props.user.name}, your current balance is: ${balance}₪`}</h3>
+     <div class="row">
+      <div class="col">
+        <div style={{textAlign: 'left',width: '70vw'}}>       
+          <OverlayFriend email={props.user.email}/>
+          <OverlayInfo />         
+        </div>
+      </div>
+      <div class="col col-lg-2">
+        <div style={{textAlign: 'right'}}>
+          <OverlayWallet wallet={wallet} />
+        </div>
+      </div>
+    </div>
+    <Coins coins={coins} handleBuy={handleBuy} />
     </div>
   )
   }

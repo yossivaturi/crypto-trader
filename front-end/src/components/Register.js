@@ -25,12 +25,14 @@ class Register extends React.Component {
   }
   onSubmitSignIn =() => {
     console.log('onSubmitSignIn');
-    fetch('http://localhost:4000/register',{
+    console.log(process.env.REACT_APP_BASE_NODE_URL);
+
+    fetch(`${process.env.REACT_APP_BASE_NODE_URL}/register`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify ({
+      body: JSON.stringify({
         email:this.state.email,
         password:this.state.password,
         name:this.state.name
@@ -40,7 +42,7 @@ class Register extends React.Component {
     .then(response => response.json())
     .then(user => {
       this.setState({show: false})
-      console.log('user',user);
+      console.log(user);
 
     })
     .catch(e => {
